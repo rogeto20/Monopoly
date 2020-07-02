@@ -1,0 +1,17 @@
+﻿18	ADVGO	community chest	money	Advance to Go	Collect $200.	200
+19	BANKE	community chest	money	Bank error in your favor	Collect $200.	200
+20	DOCTF	community chest	money	Doctor's Fees	Pay $50.	-50
+21	SALES	community chest	money	From sale of stock you get $50	Collect $50.	50
+22	GETJF	community chest	item	Get out of Jail Free	This card may be kept until needed, or traded/sold.	0
+23	GOTOJ	community chest	move	Go to Jail	Do not pass Go, do not collect $200.	10
+24	GRDON	community chest	money	Grand Opera Night	Collect $50 from every player for opening night seats.	50
+25	HOLFM	community chest	money	Holiday Fund matures	Receive $100.	100
+26	INCTR	community chest	money	Income Tax Refund	Collect $20.	20
+27	YBDAY	community chest	money	It is your Birthday	Collect $10 from each player.	10
+28	LINSM	community chest	money	Life Insurance Matures	Collect $100.	100
+29	HOSPF	community chest	money	Pay hospital fees of $100	Pay $100.	-100
+30	SCHLF	community chest	money	Pay school fees of $150	Pay $150.	-150
+31	CONSF	community chest	money	Receive $25 consultancy fee	Collect $25	25
+32	STRRP	community chest	money	Assessed for street repairs	You are assessed for street repairs - $40 per house - $115 per hotel.	0
+33	BEUTP	community chest	money	You have won second prize in a beauty contest	Collect $10	10
+34	INHRT	community chest	money	You inherit $100	Collect $100	100
