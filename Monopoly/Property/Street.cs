@@ -1,24 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
     class Street : Property
     {
-        
+
         public int buyingCost;
         public int costToBuild;
-        public int [] rentPerBuilding = new int [6];
+        public int[] rentPerBuilding = new int[6];
         public int rent;
         public int defaultRent;
         public int houses;
         public int hotels;
         public int count;
         public bool isMonopoly;
-        
+
 
         public Street(string[] details) : base(details)
         {
@@ -28,11 +25,11 @@ namespace Monopoly
             this.hotels = 0;
             this.owner = null;
             this.count = int.Parse(details[12]);
-            for(int i =0; i < rentPerBuilding.Length; i++)
+            for (int i = 0; i < rentPerBuilding.Length; i++)
             {
-                this.rentPerBuilding[i] = int.Parse(details[i+6]);
+                this.rentPerBuilding[i] = int.Parse(details[i + 6]);
             }
-            this.rent = rentPerBuilding[houses+hotels];
+            this.rent = rentPerBuilding[houses + hotels];
             this.defaultRent = rentPerBuilding[houses + hotels];
         }
 
@@ -74,7 +71,7 @@ namespace Monopoly
                     Console.WriteLine("You don't have enough money");
                     turn.declareBankruptcyToPlayer(this.owner);
                 }
-                
+
             }
             else if (Console.ReadKey().Key == ConsoleKey.B)
             {
@@ -100,11 +97,11 @@ namespace Monopoly
         {
             if (turn.money > this.buyingCost)
             {
-            turn.property.Add(this);
-            this.owner = turn;
-            turn.money -= this.buyingCost;
-            updateRent();
-            Console.WriteLine("\nYou now own " + this.name);
+                turn.property.Add(this);
+                this.owner = turn;
+                turn.money -= this.buyingCost;
+                updateRent();
+                Console.WriteLine("\nYou now own " + this.name);
             }
             else
             {
@@ -129,15 +126,15 @@ namespace Monopoly
                     }
                 }
             }
-            if(this.hotels != 0)
+            if (this.hotels != 0)
             {
-              this.rent = this.rentPerBuilding[this.houses+this.hotels];
+                this.rent = this.rentPerBuilding[this.houses + this.hotels];
             }
-            else if(this.houses > 0)
+            else if (this.houses > 0)
             {
-              this.rent = this.rentPerBuilding[this.houses];
+                this.rent = this.rentPerBuilding[this.houses];
             }
-            else if(prop.Count == this.count)
+            else if (prop.Count == this.count)
             {
                 for (int i = 0; i < prop.Count; i++)
                 {

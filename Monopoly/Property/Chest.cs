@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -11,7 +8,7 @@ namespace Monopoly
     {
         public static List<Card> cards = new List<Card>();
         public static bool made = false;
-        public static int counter=0;
+        public static int counter = 0;
 
         public Chest(string[] details) : base(details)
         {
@@ -27,7 +24,7 @@ namespace Monopoly
                 made = true;
                 Shuffle();
             }
-            
+
         }
         public void Shuffle()
         {
@@ -45,7 +42,7 @@ namespace Monopoly
 
         public override void action(Player turn)
         {
-            if(counter < cards.Count)
+            if (counter < cards.Count)
             {
                 cards[counter].action(turn);
                 counter++;
@@ -58,7 +55,7 @@ namespace Monopoly
                 counter++;
             }
         }
-        
+
         public override string getDetails()
         {
             throw new NotImplementedException();

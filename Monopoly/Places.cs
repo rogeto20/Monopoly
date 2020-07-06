@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
     class Places
     {
         public List<Property> places;
-        
+
         public Places()
         {
             this.places = getPlaces();
@@ -22,10 +18,10 @@ namespace Monopoly
             string path = @"..\..\Property\Lists\List.txt";
             string[] lines = File.ReadAllLines(path);
 
-            for(int i =0; i < lines.Length; i++)
+            for (int i = 0; i < lines.Length; i++)
             {
                 string[] details = lines[i].Split(',');
-                
+
                 temp.Add(placeBuilder(details));
             }
 
@@ -36,17 +32,19 @@ namespace Monopoly
         {
             Property place = null;
 
-            if(details[1].Equals("Go"))
+            if (details[1].Equals("Go"))
             {
                 place = new Go(details);
-            } else if (details[1].Equals("Street"))
+            }
+            else if (details[1].Equals("Street"))
             {
                 place = new Street(details);
             }
-            else if(details[1].Equals("Chest"))
+            else if (details[1].Equals("Chest"))
             {
                 place = new Chest(details);
-            } else if (details[1].Equals("Tax"))
+            }
+            else if (details[1].Equals("Tax"))
             {
                 place = new Tax(details);
             }
@@ -74,7 +72,7 @@ namespace Monopoly
             {
                 place = new Parking(details);
             }
-                return place;
+            return place;
         }
     }
 }

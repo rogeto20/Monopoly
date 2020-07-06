@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Monopoly
+﻿namespace Monopoly
 {
     abstract class Property
     {
-        public  string space;
-        public  string name;
+        public string space;
+        public string name;
         public int position;
         public string color;
         public Player owner;
-     
-        public Property(string [] details)
+
+        public Property(string[] details)
         {
             name = details[0];
             space = details[1];

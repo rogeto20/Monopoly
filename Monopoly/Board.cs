@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -18,9 +15,9 @@ namespace Monopoly
             Places = new Places();
             Console.WriteLine(">Please enter the number of players!");
             var num = int.Parse(Console.ReadLine());
-            for (int i = 0; i<num; i++)
+            for (int i = 0; i < num; i++)
             {
-                Console.WriteLine(">>Please enter the name of player:" + (i+1));
+                Console.WriteLine(">>Please enter the name of player:" + (i + 1));
                 var name = Console.ReadLine();
                 this.Players.Add(new Player(name, this));
             }
@@ -29,7 +26,7 @@ namespace Monopoly
 
         public static Board GetBoard()
         {
-            if(board == null)
+            if (board == null)
             {
                 board = new Board();
                 return board;

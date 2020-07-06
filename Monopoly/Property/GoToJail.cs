@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -10,7 +6,7 @@ namespace Monopoly
     {
         public GoToJail(string[] details) : base(details)
         {
-            
+
         }
 
         public override void action(Player turn)

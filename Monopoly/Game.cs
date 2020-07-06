@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -34,13 +32,13 @@ namespace Monopoly
                 var selected = false;
                 while (!selected)
                 {
-                    if(Key == ConsoleKey.A)
+                    if (Key == ConsoleKey.A)
                     {
                         turn.action();
                         playRound();
                         selected = true;
                     }
-                    else if(Key == ConsoleKey.P)
+                    else if (Key == ConsoleKey.P)
                     {
                         playRound();
                         selected = true;
@@ -64,7 +62,7 @@ namespace Monopoly
         {
             if (!turn.inJail)
             {
-                
+
                 Console.WriteLine("Press 'r' to roll the dice");
                 var Key = Console.ReadKey().Key;
                 var selected = false;
@@ -131,14 +129,14 @@ namespace Monopoly
         private bool hasWinner()
         {
             bool winner = false;
-            for(int i = 0; i<players.Count; i++)
+            for (int i = 0; i < players.Count; i++)
             {
                 if (players[i].isBankrupt)
                 {
                     this.players.Remove(players[i]);
                 }
             }
-            if(players.Count == 1)
+            if (players.Count == 1)
             {
                 Console.WriteLine("{0} has won the game!", players[0].name);
                 Console.WriteLine("Press any key to see their standings!");
@@ -172,11 +170,11 @@ namespace Monopoly
 
             var roll1 = rand.Next(1, 7);
             var roll2 = rand.Next(1, 7);
-            
+
 
             if (roll1 == roll2)
             {
-                Console.WriteLine("\nYou rolled a double {0}, you are out of jail.",roll1);
+                Console.WriteLine("\nYou rolled a double {0}, you are out of jail.", roll1);
                 move(roll1 + roll2);
                 turn.inJail = false;
                 Jail.prisoners.Remove(turn);
@@ -187,7 +185,7 @@ namespace Monopoly
                 turn.jailCount++;
                 Console.WriteLine("\nYou rolled '{0}' & '{1}'", roll1, roll2);
                 Console.WriteLine("Try No. {0}", turn.jailCount);
-                if(turn.jailCount == 3 && turn.money>=50)
+                if (turn.jailCount == 3 && turn.money >= 50)
                 {
                     Console.WriteLine("You paid the $50 fine. You are Free!");
                     var amount = turn.money;
@@ -197,13 +195,14 @@ namespace Monopoly
                     turn.inJail = false;
                     Jail.prisoners.Remove(turn);
                     turn.jailCount = 0;
-                } else if (turn.jailCount == 3 && turn.money < 50)
+                }
+                else if (turn.jailCount == 3 && turn.money < 50)
                 {
                     Console.WriteLine("YOU ARE OUT OF TRYS AND MONEY! IT'S A LIFETIME IN JAIL FOR YOU!");
                     turn.declareBankruptcyToBank();
                 }
             }
-            
+
         }
 
         private void roll(int count)
@@ -212,20 +211,20 @@ namespace Monopoly
 
             var roll1 = rand.Next(1, 7);
             var roll2 = rand.Next(1, 7);
-            
+
 
             if (roll1 == roll2)
             {
                 count++;
-                if(count == 3)
+                if (count == 3)
                 {
                     Console.WriteLine("\n{0} Rolled a double {1} times", turn.name, count);
                     GoToJail.sendToJail(turn);
                 }
-                else 
+                else
                 {
                     Console.WriteLine("\nYou rolled doubles of '{0}'. {1} - double", roll1, count);
-                    move(roll1+roll2);
+                    move(roll1 + roll2);
                     if (turn.isBankrupt)
                     {
                         return;
@@ -253,28 +252,29 @@ namespace Monopoly
                     }
                     else
                     {
-                    Console.WriteLine("\n>>>R: Roll again");
+                        Console.WriteLine("\n>>>R: Roll again");
 
-                    var selected = false;
-                    var Key = Console.ReadKey().Key;
-                    while (!selected)
-                    {
-                        if (Key == ConsoleKey.R)
+                        var selected = false;
+                        var Key = Console.ReadKey().Key;
+                        while (!selected)
                         {
-                            roll(count);
-                            return;
+                            if (Key == ConsoleKey.R)
+                            {
+                                roll(count);
+                                return;
+                            }
+                            else
+                            {
+                                Console.WriteLine("\n>>>R: Roll again");
+                                Key = Console.ReadKey().Key;
+                            }
                         }
-                        else
-                        {
-                            Console.WriteLine("\n>>>R: Roll again");
-                            Key = Console.ReadKey().Key;
-                        }
-                    }
 
                     }
                 }
-                
-            }else
+
+            }
+            else
             {
                 Console.WriteLine("\nYou rolled '{0}' & '{1}'", roll1, roll2);
                 move(roll1 + roll2);
@@ -288,11 +288,11 @@ namespace Monopoly
             Console.Clear();
 
             turnNum++;
-            if(turnNum == players.Count)
+            if (turnNum == players.Count)
             {
                 turnNum -= players.Count;
             }
-            
+
             turn = players[turnNum];
             Console.WriteLine("{0}'s turn", turn.name);
         }
@@ -300,22 +300,24 @@ namespace Monopoly
         public void move(int roll)
         {
             var position = turn.positionOnBoard.position;
-            
+
             position += roll;
-            if(position > board.Places.places.Count)
+            if (position > board.Places.places.Count)
             {
                 position = position - board.Places.places.Count;
                 passGo();
-            } else if (position == board.Places.places.Count)
+            }
+            else if (position == board.Places.places.Count)
             {
                 position = position - board.Places.places.Count;
-            } else if (position<0)
+            }
+            else if (position < 0)
             {
                 position = position + board.Places.places.Count;
             }
             turn.positionOnBoard = board.Places.places[position];
-           Console.WriteLine("Moved {0} spots to ->\n\t::{1}", roll, turn.positionOnBoard.name);
-           checkPlace();
+            Console.WriteLine("Moved {0} spots to ->\n\t::{1}", roll, turn.positionOnBoard.name);
+            checkPlace();
         }
 
         private void passGo()
@@ -333,14 +335,14 @@ namespace Monopoly
         {
             var players = "";
             var startMessage = new StringBuilder("\n");
-            for (int i =0; i<this.board.Players.Count; i++)
+            for (int i = 0; i < this.board.Players.Count; i++)
             {
-                players+= (i+1)+": "+this.board.Players[i].name + "\n";
+                players += (i + 1) + ": " + this.board.Players[i].name + "\n";
             }
-            startMessage.AppendFormat("Game setup successfully! \nThere are {0} players. \n{1}", this.board.Players.Count,players );
+            startMessage.AppendFormat("Game setup successfully! \nThere are {0} players. \n{1}", this.board.Players.Count, players);
             Console.WriteLine(startMessage);
             this.turn = this.players[turnNum];
-            
+
         }
 
 

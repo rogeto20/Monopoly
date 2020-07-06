@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -51,12 +48,12 @@ namespace Monopoly
             var rent = 0;
             var roll = 0;
             Console.WriteLine("Property is a utility. Press 'r' to roll dice");
-            if(Console.ReadKey().Key == ConsoleKey.R)
+            if (Console.ReadKey().Key == ConsoleKey.R)
             {
                 roll = rollDice();
-                rent = this.rent*roll;
+                rent = this.rent * roll;
             }
-            
+
             Console.WriteLine("Amount due-> (Rent:{0}) * (Roll:{1}) = {2}", this.rent, roll, rent);
             Console.WriteLine("Press:\n\t'P' -> Pay\n\t'B'->Declare bankruptcy");
             if (Console.ReadKey().Key == ConsoleKey.P)
@@ -74,10 +71,10 @@ namespace Monopoly
 
         public int rollDice()
         {
-            
+
             Random rand = new Random();
-            var roll1 = rand.Next(1,7);
-            var roll2 = rand.Next(1,7);
+            var roll1 = rand.Next(1, 7);
+            var roll2 = rand.Next(1, 7);
 
             return roll1 + roll2;
         }
@@ -151,11 +148,11 @@ namespace Monopoly
             var details = "";
             if (this.isMonopoly)
             {
-                details = "(M)"+ this.name + "(" + this.color + ")(Rent =" + this.rent + ") ";
+                details = "(M)" + this.name + "(" + this.color + ")(Rent =" + this.rent + ") ";
             }
             else
             {
-                details = this.name+ "(" + this.color + ")(Rent =" + this.rent + ") ";
+                details = this.name + "(" + this.color + ")(Rent =" + this.rent + ") ";
             }
             return details;
         }

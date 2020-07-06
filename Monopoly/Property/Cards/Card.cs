@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -23,12 +19,12 @@ namespace Monopoly
             category = list[3];
             name = list[4];
             desc = list[5];
-            effect= int.Parse(list[6]);
+            effect = int.Parse(list[6]);
         }
 
         public void action(Player turn)
         {
-            Console.WriteLine("\t::{0}\n\t::{1}",this.name, this.desc);
+            Console.WriteLine("\t::{0}\n\t::{1}", this.name, this.desc);
             switch (this.category)
             {
                 case "move":
@@ -47,7 +43,7 @@ namespace Monopoly
         {
             var position = turn.positionOnBoard.position;
             var roll = 0;
-            
+
             if (this.tag.Contains("GOTOJ"))
             {
                 GoToJail.sendToJail(turn);
@@ -55,12 +51,12 @@ namespace Monopoly
             }
             else if (this.tag.Contains("ADVNR"))
             {
-                int [] rails = {5,15,25,35};
+                int[] rails = { 5, 15, 25, 35 };
                 roll = checkNearest(position, rails);
             }
             else if (this.tag.Contains("ADVNU"))
             {
-                int[] util = {12,28};
+                int[] util = { 12, 28 };
                 roll = checkNearest(position, util);
             }
             else
@@ -84,11 +80,11 @@ namespace Monopoly
         {
             var num = 0;
 
-            while( num < place.Length && position> place[num] )
+            while (num < place.Length && position > place[num])
             {
                 num++;
             }
-            if(num >= place.Length)
+            if (num >= place.Length)
             {
                 num = 0;
             }
@@ -100,7 +96,8 @@ namespace Monopoly
             if (this.tag.Contains("GENRP"))
             {
                 makeRepairs(turn);
-            }else if (this.tag.Contains("CHBRD"))
+            }
+            else if (this.tag.Contains("CHBRD"))
             {
                 chairman(turn);
             }
@@ -118,7 +115,7 @@ namespace Monopoly
             }
             else
             {
-                if(this.effect > 0)
+                if (this.effect > 0)
                 {
                     turn.money += this.effect;
                     if (this.effect < 0)
@@ -127,7 +124,7 @@ namespace Monopoly
                     }
                     Console.WriteLine("You have ${0} left", turn.money);
                 }
-                else if(this.effect < 0)
+                else if (this.effect < 0)
                 {
                     Console.WriteLine("Press:\n\t'P' -> Pay fee.\n\t'B'-> Declare bankruptcy");
                     if (Console.ReadKey().Key == ConsoleKey.P)
@@ -151,11 +148,11 @@ namespace Monopoly
                         turn.declareBankruptcyToBank();
                     }
                 }
-                
+
             }
         }
 
-        
+
         private void collect(Player turn)
         {
             var players = turn.Board.Players;
@@ -171,7 +168,7 @@ namespace Monopoly
                     Console.WriteLine("\t::{0} declared bankruptcy to you", player.name);
                     player.declareBankruptcyToPlayer(turn);
                 }
-                
+
             }
             Console.WriteLine("\t::New Balance: ${0}", turn.money);
 
@@ -180,11 +177,11 @@ namespace Monopoly
         private void chairman(Player turn)
         {
             var players = turn.Board.Players;
-            var money = (players.Count-1) * 50;
+            var money = (players.Count - 1) * 50;
             Console.WriteLine("\t::{0} to be paid in total.", money);
             if (money < turn.money)
             {
-                foreach(Player player in players)
+                foreach (Player player in players)
                 {
                     player.money += this.effect;
                     turn.money -= this.effect;
@@ -196,7 +193,7 @@ namespace Monopoly
                 Console.WriteLine("\t::You have insufficient funds! Bankrupt to the bank");
                 turn.declareBankruptcyToBank();
             }
-            
+
         }
 
         private void makeRepairs(Player turn)
@@ -212,16 +209,17 @@ namespace Monopoly
             {
                 hotRepairs = 100;
                 houRepairs = 25;
-            } else if (this.tag.Equals("GENRP"))
+            }
+            else if (this.tag.Equals("GENRP"))
             {
                 hotRepairs = 115;
                 houRepairs = 40;
             }
 
 
-            for (int i = 0; i<prop.Count; i++)
+            for (int i = 0; i < prop.Count; i++)
             {
-                if(prop[i] is Street)
+                if (prop[i] is Street)
                 {
                     var street = (Street)prop[i];
                     if (street.hotels > 0)
@@ -229,14 +227,14 @@ namespace Monopoly
                         repairs += hotRepairs;
                         hotels++;
                     }
-                    else if(street.houses > 0)
+                    else if (street.houses > 0)
                     {
                         repairs += houRepairs * street.houses;
-                        houses+=street.houses;
+                        houses += street.houses;
                     }
                 }
             }
-            if(repairs == 0)
+            if (repairs == 0)
             {
                 Console.WriteLine("\t::No Houses or Hotels to Repair!");
                 return;
@@ -258,7 +256,7 @@ namespace Monopoly
                         Console.WriteLine("You don't have enough money and are now bankrupt to the bank");
                         turn.declareBankruptcyToBank();
                     }
-                    
+
                 }
                 else if (Console.ReadKey().Key == ConsoleKey.B)
                 {

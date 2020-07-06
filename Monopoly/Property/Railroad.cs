@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -60,7 +57,7 @@ namespace Monopoly
             }
         }
 
-        public void buy (Player turn)
+        public void buy(Player turn)
         {
             Console.WriteLine("Press-> \n\t'B':Buy \n\t'X':Don't buy");
             if (Console.ReadKey().Key == ConsoleKey.B)
@@ -95,19 +92,19 @@ namespace Monopoly
             var prop = new List<Railroad>();
             prop.Add(this);
 
-            for(int i = 0; i<places.Count; i++)
+            for (int i = 0; i < places.Count; i++)
             {
-                if(this.color == places[i].color)
+                if (this.color == places[i].color)
                 {
                     var temp = (Railroad)places[i];
-                    if(this.owner == temp.owner && this.name != temp.name)
+                    if (this.owner == temp.owner && this.name != temp.name)
                     {
                         prop.Add(temp);
                     }
                 }
             }
 
-            for(int i=0; i<prop.Count; i++)
+            for (int i = 0; i < prop.Count; i++)
             {
                 prop[i].rent = defaultRent * prop.Count;
             }
@@ -115,7 +112,7 @@ namespace Monopoly
 
         public override string getDetails()
         {
-            var details = this.name + "(Type = "+this.color+")(Rent =" + this.rent + ")";
+            var details = this.name + "(Type = " + this.color + ")(Rent =" + this.rent + ")";
             return details;
         }
     }

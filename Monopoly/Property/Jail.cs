@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -23,19 +20,19 @@ namespace Monopoly
             else
             {
                 Console.WriteLine("Just visiting:");
-                if(prisoners.Count == 0)
+                if (prisoners.Count == 0)
                 {
                     Console.WriteLine("Prison is currently empty");
                 }
                 else
                 {
-                    for(int i = 0; i < prisoners.Count; i++)
+                    for (int i = 0; i < prisoners.Count; i++)
                     {
                         Console.WriteLine(prisoners[i].name);
                     }
                     Console.WriteLine("Who are currently locked up! They look thin, prison life isn't treating them well.");
                 }
-                
+
             }
         }
 

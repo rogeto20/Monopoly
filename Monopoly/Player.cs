@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Monopoly
 {
@@ -32,24 +30,24 @@ namespace Monopoly
         {
             this.property = this.property.OrderBy(o => o.position).ToList();
             var details = "-----------------------------------------------------\n";
-                details += "$$$ = "+ this.money+"\nPlace on Board: ---> "+ this.positionOnBoard.name;
+            details += "$$$ = " + this.money + "\nPlace on Board: ---> " + this.positionOnBoard.name;
             if (this.inJail && this.positionOnBoard.name.Equals("Jail"))
             {
                 details += "\nCurrently in JAIL!";
             }
-            else if(!this.inJail && this.positionOnBoard.name.Equals("Jail"))
+            else if (!this.inJail && this.positionOnBoard.name.Equals("Jail"))
             {
                 details += "\nJust Visiting";
             }
             details += "\nProperties owned: ";
 
-            if(this.property.Count == 0)
+            if (this.property.Count == 0)
             {
                 details += "Does not own any property!";
             }
             else
             {
-                for(int i = 0; i<this.property.Count; i++)
+                for (int i = 0; i < this.property.Count; i++)
                 {
                     updateProperty(this.property[i]);
                     details += "\n\t-| " + this.property[i].getDetails();
@@ -64,16 +62,16 @@ namespace Monopoly
         {
             Console.WriteLine("Bankruptcy declared!");
             this.isBankrupt = true;
-            for(int i = 0; i < this.property.Count; i++)
+            for (int i = 0; i < this.property.Count; i++)
             {
                 var prop = this.property[i];
-                if(prop is Street)
+                if (prop is Street)
                 {
                     var street = (Street)prop;
 
                     if (street.houses > 0)
                     {
-                        var refund = (street.houses * street.costToBuild)/2;
+                        var refund = (street.houses * street.costToBuild) / 2;
                         street.houses = 0;
                         this.money += refund;
                         Console.WriteLine("{0} Houses sold back", street.name);
@@ -145,11 +143,13 @@ namespace Monopoly
             {
                 var temp = (Street)prop;
                 temp.updateRent();
-            } else if (prop is Railroad)
+            }
+            else if (prop is Railroad)
             {
                 var temp = (Railroad)prop;
                 temp.updateRent();
-            } else if (prop is Utility)
+            }
+            else if (prop is Utility)
             {
                 var temp = (Utility)prop;
                 temp.updateRent();
@@ -160,7 +160,7 @@ namespace Monopoly
         {
             bool done = false;
             var monopoly = new List<Street>();
-            for(int i =0; i<this.property.Count; i++)
+            for (int i = 0; i < this.property.Count; i++)
             {
                 if (property[i] is Street)
                 {
@@ -171,16 +171,16 @@ namespace Monopoly
                     }
                 }
             }
-            if(monopoly.Count > 0)
+            if (monopoly.Count > 0)
             {
-                
+
                 while (!done)
                 {
                     Console.Clear();
                     Console.WriteLine("\t-Monopolized Property-(Balance:${0})", this.money);
-                    for(int i = 0; i<monopoly.Count; i++)
+                    for (int i = 0; i < monopoly.Count; i++)
                     {
-                        Console.WriteLine("\t["+i+"] {0}\t(Cost to Build:(${1}), Houses:{2}, Hotels:{3})", monopoly[i].name, monopoly[i].costToBuild, monopoly[i].houses, monopoly[i].hotels);
+                        Console.WriteLine("\t[" + i + "] {0}\t(Cost to Build:(${1}), Houses:{2}, Hotels:{3})", monopoly[i].name, monopoly[i].costToBuild, monopoly[i].houses, monopoly[i].hotels);
                     }
                     Console.WriteLine("Enter the number of the Street you would like to build");
                     var num = int.Parse(Console.ReadLine());
@@ -231,7 +231,7 @@ namespace Monopoly
                         Console.WriteLine("\t::Hotel Added\n\t::Money Left(${0})", this.money);
                     }
                 }
-                else if(this.money > prop.costToBuild && buildings == 5)
+                else if (this.money > prop.costToBuild && buildings == 5)
                 {
                     Console.WriteLine("Maximum number of buildings reached");
                     return;
